@@ -26,8 +26,7 @@ jobs:
 
       - name: Run Preprocessing Script
         run: |
-          python preprocessing/automate_Adji\ Setyawan\ Saputra.py --input ./fruits-360-raw/Training --output ./preprocessing/fruits_preprocessing --classes "Apple Braeburn 1" "Banana 1" "Cherry 1"
-
+          python "preprocessing/automate_Adji Setyawan Saputra.py" --input ./fruits-360-raw/Training --output ./preprocessing/fruits_preprocessing
       - name: Upload Preprocessed Data as Artifact
         uses: actions/upload-artifact@v4
         with:
