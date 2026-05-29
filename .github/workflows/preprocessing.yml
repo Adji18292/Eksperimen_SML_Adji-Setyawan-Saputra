@@ -1,0 +1,37 @@
+name: Data Preprocessing Automation
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "preprocessing/automate_*.py"
+      - "fruits-360-raw/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tensorflow==2.15.0 numpy
+
+      - name: Run Preprocessing Script
+        run: |
+          python preprocessing/automate_Adji\ Setyawan\ Saputra.py --input ./fruits-360-raw/Training --output ./preprocessing/fruits_preprocessing --classes "Apple Braeburn 1" "Banana 1" "Cherry 1"
+
+      - name: Upload Preprocessed Data as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: preprocessed-dataset
+          path: ./preprocessing/fruits_preprocessing/
