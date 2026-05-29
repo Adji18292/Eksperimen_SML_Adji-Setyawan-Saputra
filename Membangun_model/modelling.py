@@ -63,8 +63,13 @@ with mlflow.start_run(run_name="Run_Adji_Setyawan"):
     plt.savefig("grafik_loss.png")
     mlflow.log_artifact("grafik_loss.png")
     
-    print("Menyimpan model ke format .h5 dan mengunggah sebagai artifact...")
-    model.save("model.h5")
-    mlflow.log_artifact("model.h5")
+    print("Menyimpan model ke format MLflow dan mengunggah...")
+    import shutil
+    if os.path.exists("my_model_dir"):
+        shutil.rmtree("my_model_dir")
+        
+    mlflow.keras.save_model(model, "my_model_dir")
+    
+    mlflow.log_artifacts("my_model_dir", artifact_path="model")
 
 print("Training selesai! Silakan cek DagsHub Anda.")
