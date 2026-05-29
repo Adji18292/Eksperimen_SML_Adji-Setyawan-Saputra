@@ -4,6 +4,11 @@ from tensorflow.keras import layers, models
 import matplotlib.pyplot as plt
 import mlflow
 import mlflow.keras
+import sys
+
+# Fix Windows console encoding issues for emojis printed by MLflow
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
 
 os.environ["MLFLOW_TRACKING_USERNAME"] = "Adji18292"
 os.environ["MLFLOW_TRACKING_PASSWORD"] = "d47068cae7c375ebefd29ab5a22552675d8e093c"
@@ -57,5 +62,8 @@ with mlflow.start_run(run_name="Run_Adji_Setyawan"):
     plt.legend()
     plt.savefig("grafik_loss.png")
     mlflow.log_artifact("grafik_loss.png")
+    
+    print("Menyimpan model ke MLflow...")
+    mlflow.keras.log_model(model, "model")
 
 print("Training selesai! Silakan cek DagsHub Anda.")
