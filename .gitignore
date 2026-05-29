@@ -1,0 +1,9 @@
+venv/
+Membangun_model/venv/
+__pycache__/
+*.pyc
+mlruns/
+model_summary_Adji.txt
+grafik_loss.png
+.ipynb_checkpoints/
+Membangun_model/fruits_preprocessing/
